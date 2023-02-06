@@ -1,0 +1,1452 @@
+/*
+Theme Name: Atom Web Design RI
+Text Domain: Atom Web Design RI
+Version: 1.2
+Description: Custom Theme built by Atom Web Design RI. All rights reserved.
+Tags: Atom Web Design, atomri, atom, responsive, simple
+Author: Atom Web Design
+Author URI: https://atomri.com
+*/
+:root{
+    --atom-blue:#345ca3;
+    --atom-gray:#343a3f;
+    --atom-white:#f2f2f2;
+    --atom-purple:#695AA0;
+}
+
+/* FONTS */
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/roboto/Roboto-Regular.ttf');
+}
+    @font-face {
+        font-family:'roboto-bold';
+        src: url('/fonts/Roboto/Roboto-Bold.ttf');
+    }
+    @font-face {
+        font-family:'roboto-medium' ;
+        src: url('/fonts/Roboto/Roboto-Medium.ttf');
+    }
+@font-face {
+    font-family: 'roboto-condensed';
+    src: url('/fonts/RobotoCondensed/RobotoCondensed-Regular.ttf')
+}
+
+/* END FONTS */
+
+
+/* ANIMATIONS */
+@keyframes flyInHeader {
+    0% {
+        right:-100vw;
+        width:1vw;
+    }
+    100% {
+        right:0px;
+        width:100vw;
+    }
+}
+@keyframes flyOutHeader {
+    0% {
+        right:0px;
+    }
+    100% {
+        right:-100vw;
+    }
+}
+/* ANIMATIONS END */
+
+/* STYLE GUIDE */
+h1{ /* Hero Image Text, Other Main Page Text */
+    font-family:'roboto-bold', 'arial', sans-serif;
+    font-weight:bolder;
+    font-size:60px;
+    color:var(--atom-secondary);
+}
+h2{ /* Headings within page */
+    font-family:'roboto-bold', 'arial', sans-serif;
+    font-weight:bold;
+    font-size:40px;
+    color:var(--atom-secondary);
+    margin:0;
+}
+h3 { /* minor headings for sub categories */
+    font-family:'roboto-bold', 'arial', sans-serif;
+    font-weight:bold;
+    font-size:30px;
+    color:var(--atom-secondary);
+}
+p { /* body text */
+    font-family:'roboto-regular', 'arial', sans-serif;
+    font-size:18px;
+}
+
+button, a {
+    font-family:'roboto-medium', 'arial', sans-serif;
+    transition:all .25s;
+    cursor:pointer;
+}
+a {
+    color:var(--atom-primary);
+    text-decoration:none;
+}
+    a:hover {
+        color:#4c80e1;
+        text-decoration:underline;
+    }
+button.atom-primary, a.atom-primary, button.atom-secondary, a.atom-secondary, input.atom-primary, input.atom-secondary, #commentform input[type="submit"] {
+    font-size:18px;
+    border-radius:8px;
+    padding:10px 40px; 
+    text-decoration:none;
+    text-align:center;
+}
+button.atom-primary, a.atom-primary, input.atom-primary, #commentform input[type="submit"] {
+    background-color:var(--atom-primary);
+    color:var(--atom-tertiary);
+    border:2px solid var(--atom-primary);
+}
+    button.atom-primary:hover, a.atom-primary:hover, input.atom-primary:hover, #commentform input[type="submit"] {
+        background-color:transparent;
+        color:var(--atom-primary);
+        
+    }
+button.atom-secondary, a.atom-secondary, input.atom-secondary {
+    background-color:transparent;
+    color:var(--atom-primary);
+    border:2px solid var(--atom-primary);
+}
+    button.atom-secondary.white, a.atom-secondary.white {
+        border-color:var(--atom-tertiary);
+        color:var(--atom-tertiary);
+    }
+button.atom-tertiary, a.atom-tertiary, input.atom-tertiary {
+    font-size:20px;
+    color:var(--atom-primary);
+}
+    button.atom-tertiary:hover, a.atom-tertiary:hover, input.atom-tertiary:hover{
+        text-decoration:underline;
+        color:var(--atom-primary);
+    }
+/* STYLE GUIDE END */
+
+/* HTML / BODY */
+html{
+    font-size:1px;
+}
+body{
+    font-family: 'roboto-regular','Arial', sans-serif;
+    font-size:16rem;
+    margin:0;
+    background:var(--atom-tertiary);
+    color:black;
+
+}
+    /* for scrollbar, not on safari */
+    body:not(.safari){
+        overflow-y:overlay;
+    }
+    body.disable-scrolling{
+        overflow:hidden;
+    }
+
+body:not(.safari)::-webkit-scrollbar{
+    width:8rem;
+}
+    body:not(.safari)::-webkit-scrollbar-track{
+        box-shadow:inset 0 0 6px rgba(0,0,0,0);
+    }
+    body:not(.safari)::-webkit-scrollbar-thumb{
+        
+        background-color:#32323279;
+        border-radius:5rem;
+    }
+    body:not(.safari)::-webkit-scrollbar-thumb:hover{
+        background-color:#323232;
+    }
+
+
+/* Disable safari phone number / email recognition */
+a[href^='tel'], a[href^='mailto']{
+    color:inherit;
+    text-decoration:none;
+}
+/* HTML / BODY END */
+
+
+
+/* HEADER */
+.atom-header {
+    height:10vh;
+    background-color:var(--atom-header);
+    color:var(--atom-header-text);
+    border-bottom:1px solid #d9d9d9;
+    padding:15px; 
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items:center;
+    box-sizing:border-box;
+    transition: all .25s;
+    min-height:75px;
+    position:relative;
+    z-index:9999999999;
+}
+    .atom-header.bg-white {
+        border-bottom:1px solid #d9d9d9;
+        box-shadow:0 -8px 30px;
+        z-index:9;
+    }
+.atom-logo-header {
+    height:100%;
+    background: url(/images/atom_logo_white.png) no-repeat;
+    background-size:cover;
+    transition: background-image .25s;
+    margin-left:10px;
+}
+.atom-header.bg-white > .atom-logo-header {
+    background:url(/images/atom_logo_original.png) no-repeat;
+    background-size:cover;
+}
+.atom-logo-header > img {
+    height:100%;
+    /*visibility:hidden;*/
+}
+
+.atom-header-bar-buttons{
+    font-size:32px;
+    display:flex;
+    flex-direction:row;
+}
+.atom-header-bar-buttons.slideout {
+    display: block;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left:0;
+    box-sizing:border-box;
+    backdrop-filter: blur(8px);
+    text-align:right;
+    color:white;
+    background-color:rgba(0,0,0,0.3);
+
+    animation: flyInHeader ease-out .25s;
+    animation-iteration-count:1;
+    animation-fill-mode:forwards;
+}
+.atom-header .slideout .atom-header-bar-collapse-exit {
+    display:block;
+    padding:25px;
+    cursor:pointer;
+}
+.atom-header .atom-header-bar-collapse-exit {
+    display:none;
+}
+
+
+.atom-header-bar-button, .menu-item, .menu-item-has-children > a{
+    font-family: 'roboto-medium', 'Arial', 'sans-serif';
+    display:flex;
+    flex-direction:column;
+    padding:10px 25px;
+    /* cursor:pointer; */
+    transition:color .25s;
+    font-size: 20px;
+    position:relative;
+}
+    .atom-header-bar-button > a, .menu-item > a {
+        color:inherit;
+        text-decoration:none;
+        transition: color .5s;
+        white-space:nowrap;
+    }
+        .atom-header-bar-button > a:hover, .menu-item > a:hover {
+            text-decoration: underline;
+        }
+    .menu-item-has-children{
+        padding:0;
+    }
+    .atom-header-bar-button > ul.sub-menu {
+        margin:0;
+    }
+
+        
+.atom-header-bar-collapse-menu {
+    /* color: black; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 3vw;
+    cursor:pointer;
+    user-select:none;
+}
+.atom-header-bar-collapse-menu > i {
+    user-select:none;
+    font-size: 48rem;
+}
+.atom-header-bar-buttons {
+    display:none;
+}
+
+
+
+
+.atom-header.invisible {
+    background-color:transparent;
+    position:absolute;
+    border-bottom:0;
+}
+.atom-header.invisible .atom-header-bar-button > a:hover, .atom-header.invisible .menu-item > a:hover {
+    text-decoration: underline;
+}
+.atom-header.invisible .atom-header-bar-collapse-menu {
+    /* color:white; */
+}
+
+.atom-header.sticky {
+    position:fixed;
+    width:100%;
+}
+
+.atom-header.bg-white {
+    background-color:var(--atom-header);
+    color:var(--atom-header-text);
+}
+.atom-header.up {
+    margin-top:-77px;
+}
+.atom-header.down {
+    margin-top:0;
+}
+
+.atom-header-bar-phone-address-and-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.atom-header-bar-phone-and-address {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: flex-end;
+    justify-content: flex-end;
+    align-self:flex-end;
+    display:none;
+}
+.atom-header-bar-phone-and-address > * {
+    margin: 0;
+    display: inline;
+    border-right: 2px solid var(--atom-primary);
+    color: var(--atom-primary) !important;
+    padding-right: 10px;
+    margin-top: 10px;
+    font-size:18px;
+}
+    .atom-header-bar-phone-and-address > *:hover{
+        text-decoration:underline;
+    }
+    .atom-header-bar-phone-and-address > *:last-child{
+        border-right:unset;
+    }
+    
+.atom-header.second { 
+    height:unset;
+    min-height:10vh;
+}
+.atom-header.second .menu-item{
+    padding:15px 20px;
+}
+.atom-header.second .atom-header-bar-buttons
+{
+    flex-direction:column;
+}
+.atom-header.second .atom-header-bar-buttons-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+/* HEADER END */
+
+
+/* FOOTER */
+.atom-footer {
+    display:flex;
+    flex-direction: column;
+    background: #34393F;
+    color:white;
+    text-align:center;
+    padding:25px 25px 75px 25px;
+    box-sizing:border-box;
+}
+
+.atom-footer-icon {
+    font-size:32rem;
+}
+.atom-footer-details {
+    font-size:20rem;
+    margin-bottom:25px;
+    font-family: 'roboto-medium','arial','sans-serif';
+}
+.atom-footer-details.email {
+    margin-bottom:35px;
+}
+.atom-footer-inner {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.atom-links {
+    display:flex;
+    flex-direction:column;
+    border-bottom:1px solid var(--atom-header-text);
+    padding-bottom:25px;
+}
+.atom-footer-logo-container > .atom-footer-logo {
+    width:50%;
+}
+.atom-footer-links-container {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    /* margin-left:30%; */
+    margin-top:25px;
+    grid-row-gap:10px;
+}
+.atom-footer-links-container > .links {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:space-evenly;
+}
+    .atom-footer-links-container > .links:hover {
+        color:gray;
+    }
+.atom-footer-links-container > a {
+    color:var(--atom-tertiary);
+    text-decoration:underline;
+    align-self:center;
+}
+    .atom-footer-links-container > a:hover {
+        color:gray;
+    }
+.atom-socials {
+    display:flex;
+    flex-direction:column;
+    padding-top:25px;
+}
+.atom-socials > .social-icons {
+    list-style:none;
+    user-select:none;
+
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content: space-evenly;
+
+    padding:0;
+    margin:0;
+}
+    .social-icons > li {
+        display:inline;
+    }
+        .social-icons > li > a {
+            color:var(--atom-tertiary);
+        }
+            .social-icons > li > a:hover {
+                text-decoration:none;
+            }
+        .social-icons > li > a > i {
+            border-radius:100%;
+            border:2px solid var(--atom-tertiary);
+            color:var(--atom-tertiary);
+            font-size:20px;
+            cursor:pointer;
+            padding:7px;
+        }
+            .social-icons > li > a > i:hover {
+                color:var(--atom-secondary);
+                background:var(--atom-tertiary);
+                border-color:var(--atom-tertiary);
+            }
+            .social-icons .fa-facebook-f {
+                padding:7px 10.75px;
+            }
+            .social-icons .fa-instagram {
+                padding:7px 8.25px;
+            }
+.atom-socials > .atom-copyright {
+    font-size:14px;
+}
+
+.atom-footer-icon.logo {
+    width:150px;
+    margin-bottom:5rem;
+}
+.atom-footer-icon-container {
+    margin-bottom:35px;
+}
+
+.atom-footer-social-media {
+    background: linear-gradient(271.19deg, #655BA1 5.11%, var(--atom-primary) 98.24%);
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    padding:30rem 0;
+}
+.atom-footer-social-media-inner {
+    width:35vw;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    font-size:36rem;
+}
+.atom-footer-social-media-icon {
+    cursor:pointer;
+    color:white;
+}
+    .atom-footer-social-media-icon:hover{
+        color:lightgray;
+    }
+
+input[type="submit"] {
+    cursor:pointer;
+}
+
+.atom-footer-2{
+    width:100%;
+    box-sizing:border-box;
+    background:var(--atom-secondary);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px 0 50px;
+    color:var(--atom-white);
+    min-height:25vh;
+}
+.atom-footer-2-inner {
+    width:80%;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+.atom-footer-2-inner > *{
+    flex-basis:25%;
+    box-sizing:border-box;
+}
+.atom-footer-2-logo-container > img {
+    max-width:400px;
+}
+.atom-footer-2-socials > .social-icons{
+    padding:0;
+    margin:0;
+}
+.atom-footer-2-contact-info > p{
+    margin:0;
+    margin-top:5px;
+    font-size:16px;
+}
+.atom-footer-2-footer-menu-links {
+    display: flex;
+    flex-direction: column;
+}
+.atom-footer-2 a {
+    color: var(--atom-white);
+    margin-top: 5px;
+    width:fit-content;
+}
+.atom-footer-2-button > .atom-primary {
+    background-color: var(--atom-white);
+    border-color: var(--atom-white);
+    color: var(--atom-secondary);
+    margin-top:0;
+    display:inline-block;
+}
+    .atom-footer-2-button > .atom-primary:hover {
+        color: var(--atom-white);
+    }
+    
+    
+
+.atom-footer-3 {
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    justify-content:center;
+    background:var(--atom-secondary);
+    color:var(--atom-primary);
+    padding:10vh 0;
+}
+.atom-footer-3-inner {
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+    width:80%;
+}
+.atom-footer-3-section {
+    display:flex;
+    flex-direction:column;
+    flex-basis:33.33%;
+}
+.atom-footer-3-logo-container > img {
+    width:75%;
+}
+.atom-footer-3-business-info{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+.atom-footer-3-business-info > p{
+    margin:0;
+    margin-bottom:5px;
+    width:fit-content;
+}
+.atom-web-sub-footer{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-end;
+    padding:5px 25px;
+    background:var(--atom-secondary);
+    color:var(--atom-tertiary);
+}
+
+/* FOOTER END */
+
+
+/* NOTIFICATION */
+.atom-notification{
+    display:none;
+    justify-content:center;
+    align-items:center;
+    position:fixed;
+    width:100vw;
+    height:100vh;
+    box-sizing:border-box;
+    pointer-events:none;
+    user-select:none;
+}
+.atom-notification-inner{
+    /* width:65vw; */
+    /* height:65vw; */
+    width:250rem;
+    height:250rem;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.atom-notification-icon {
+    font-size:100rem;
+}
+.atom-notification-message {
+    font-size:32rem;
+    margin:0;
+}
+/* NOTIFICATION END */
+
+/* BANNER */
+.atom-title-background {
+    position: absolute;
+    width: 100vw;
+    height: 30vh;
+    padding-top: 10vh;
+    /* background: url(/images/portfolio_banner_atom_web_design.jpg); */
+    background-color: rgba(0,0,0,.5);
+    background-size: cover;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+}
+.atom-title-image{
+    padding-top: 10vh;
+    width: 100vw;
+    height: 30vh;
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+.atom-title-image > h1 {
+    text-shadow: 0 0 20px #000;
+    color: var(--atom-tertiary);
+}
+/* BANNER END */
+
+/* RECAPTCHA */
+.grecaptcha-badge { visibility: hidden; }
+
+.recaptcha-disclaimer {
+    color:#34393F;
+    /* text-align:left; */
+    margin-bottom:50rem;
+}
+    .recaptcha-disclaimer > a{
+        color:var(--atom-primary);
+        text-decoration:none;
+    }
+    .recaptcha-disclaimer > a:hover{
+        color:#576f9b;
+    }
+/* RECAPTCHA END */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ARCHIVE */
+.atom-page-container {
+    min-height:90vh;
+    display: flex;
+    flex-direction: column;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    padding:25px 25px 0;
+}
+.atom-page-container.white{
+    background:white;
+    color:black;
+}
+.atom-archive-inner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: unset;
+    align-items: unset;
+    justify-content: unset;
+    width: 100%;
+    max-width: 850px;
+}
+.atom-post-archive-container {
+    display:flex;
+    flex-direction:column !important;
+    justify-content:center;
+    width:100%;
+    max-width:unset;
+    flex-direction:row;
+    align-items:flex-start;
+    padding:30px 0;
+    gap:10px;
+    box-sizing:border-box;
+    border-bottom:2px solid var(--atom-secondary);
+}
+    .atom-post-archive-container:first-of-type {
+        padding-top: 0;
+    }
+    .atom-post-archive-container:last-of-type{
+        border-bottom:unset;
+        margin-bottom:unset;
+    }
+.atom-blog-post-preview-info {
+    width: 100%;
+    box-sizing: border-box;
+    border: unset;
+}
+h2.atom-blog-post-archive-title {
+    margin-bottom: 5px;
+}
+p.atom-blog-post-archive-excerpt {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin-top:10px;
+}
+span.atom-blog-post-archive-release-date {
+    margin-right: 5px;
+}
+span.atom-blog-post-archive-release-date, span.atom-blog-post-archive-comments-preview{
+    color: var(--atom-secondary);
+    font-size: 14px;
+}
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+.page-numbers {
+    background-color: var(--atom-secondary);
+    color: var(--atom-tertiary);
+    padding: 15px;
+    user-select: none;
+}
+    .page-numbers:hover:not(.current) {
+        background-color: #7ca4eb;
+        color: white;
+    }
+.page-numbers.current {
+    background-color: var(--atom-primary);
+    color: var(--atom-tertiary);
+}
+h1.atom-blog-post-archive-title{
+    font-size:50px;
+    margin-top:0;
+}
+/* END ARCHIVE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* blog page */
+.atom-title-background{
+    background-image:url("/images/blog_banner.jpg");
+    z-index: -1;
+}
+.atom-title-message {
+    font-size: 48px;
+    color: white;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+    text-align: center;
+    font-family: 'Roboto-Bold','Arial', 'sans-serif';
+    font-weight: 600;
+    text-shadow:0 0 20px black;
+}
+
+.posts-container{
+    background:white;
+    color:black;
+    min-height:90vh;
+    padding-top:10vh;
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-evenly;
+    align-items:flex-start;
+}
+.posts-container-inner {
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    align-items:flex-start;
+    justify-content:space-evenly;
+    margin-top:8vh;
+}
+.blog-post-preview {
+    width:95%;
+    max-width:450px;
+    overflow:hidden;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:50px;
+    border-bottom:1px solid var(--atom-secondary);
+    box-sizing:border-box;
+    padding-bottom:30px;
+}
+    .blog-post-preview:last-of-type{
+        border:unset;
+    }
+.atom-blog-post-image-container{
+    width:100%;
+    height:200px;
+    flex:none;
+}
+
+.atom-blog-post-image {
+    width: 100%;
+    height:100%;
+    object-fit:contain;
+    box-sizing:border-box;
+    border:5px solid #DBDBDB;
+    border-radius:5px;
+}
+.blog-post-info {
+    padding:0 10px 10px;
+    width:100%;
+    box-sizing:border-box;
+}
+.blog-post-info > h2 {
+    font-size:26px;
+    margin-top:20px;
+}
+.blog-post-info > .release-date {
+    margin:10px 0;
+}
+.blog-post-info > .description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* number of lines to show */
+    line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    margin-bottom:15px;
+    font-size:18px;
+    display:none;
+}
+.read-more-link {
+    font-size:20px;
+}
+
+
+
+.blog-post-container {
+    width:100%;
+    background:white;
+    color:black;
+    min-height:100vh;
+    padding-top:15vh;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: flex-start;
+}
+.back-button{
+    color:var(--atom-primary);
+    align-self:flex-start;
+    font-size:18px;
+    margin-bottom:25px;
+    text-decoration:none;
+}
+    .back-button:hover {
+        color:#4c80e1;
+    }
+.blog-post-container-inner{
+    display:flex;
+    flex-direction:column;
+    max-width:850px;
+    width:100%;
+    box-sizing:border-box;
+    padding:0 5vw;
+}
+.blog-post-container-inner > .atom-primary {
+    width:fit-content;
+    margin-bottom:25px;
+}
+.blog-post-container-inner > img {
+    width:100%;
+    object-fit:cover;
+    box-shadow:0 0 10px black;
+    max-height:200px;
+}
+.blog-post {
+    padding-bottom:25px;
+    margin-bottom:25px;
+    /*border-bottom:1px solid var(--atom-secondary);*/
+}
+.blog-post > .title {
+    margin:20px 0 5px;
+    font-size:26px;
+}
+.blog-post > .release-date {
+    margin:0 0 25px;
+}
+.blog-post > .description {
+    font-weight:unset;
+    white-space:pre-line;
+}
+
+.article-container {
+    /* padding-bottom:50px; */
+}
+.article-container > p{
+    margin:0 0 25px;
+}
+.article-container > h2{
+    font-size:30px;
+    color:var(--atom-secondary);
+    margin:50px 0 25px;
+}
+    .article-container > h2:first-child {
+        margin-top:0;
+    }
+.article-container > h3{
+    font-size:24px;
+    color:var(--atom-primary);
+    margin-bottom:5px;
+}
+.article-container > .highlight {
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-family: monospace;    
+}
+.article-container > p:last-of-type {
+    margin-bottom:50px;
+}
+a.blog-citation {
+    color:var(--atom-primary);
+    font-style:italic;
+    font-size:14px;
+}
+
+.get-connected {
+    color:white;
+    text-decoration:none;
+    background-color:var(--atom-primary);
+    padding:10px 25px;
+    border-radius:10px;
+    font-size:20px;
+    width:fit-content;
+    margin-bottom:50px;
+}
+
+
+.error-blog-not-found{
+    min-height:100vh;
+    padding-top:10vh;
+    box-sizing:border-box;
+    background:white;
+    color:black;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+.error-blog-not-found > h1 {
+    margin:0;
+}
+.error-blog-not-found > a {
+    color:var(--atom-primary);
+}
+
+
+
+/* TAGS */
+span.atom-blog-tag {
+    background: #e7e7e7;
+    border-radius: 8px;
+    padding: 4px 7px;
+    margin: 0 5px;
+    user-select: none;
+    cursor: pointer;
+    transition:background .25s;
+}
+    span.atom-blog-tag:hover {
+        background:#b7b7b7;
+    }
+span.atom-blog-tag > a {
+    color: gray;
+    text-decoration: none;
+    margin-left: 5px;
+}
+.atom-blog-tag > i {
+    color: gray;
+}
+/* END TAGS */
+
+
+
+
+/* SHARE BUTTONS */
+ul.share-buttons{
+    list-style: none;
+    padding: 0;
+    user-select:none;
+}
+
+ul.share-buttons li{
+    display: inline;
+    margin-right:10px;
+}
+
+ul.share-buttons .sr-only{
+    position: absolute;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+ul.share-buttons a {
+    cursor:default;
+}
+ul.share-buttons a:hover{
+    text-decoration:none !important;
+}
+ul.share-buttons a > i {
+    border-radius:100%;
+    padding:7px;
+    border:2px solid var(--atom-primary);
+    color:var(--atom-primary);
+    font-size:20px;
+    cursor:pointer;
+}
+    ul.share-buttons a > i:hover {
+        color:white;
+        background:var(--atom-primary);
+        border-color:var(--atom-primary);
+    }
+    ul.share-buttons > li.facebook > a > i{
+        padding:7px 10.75px;
+    }
+/* END SHARE BUTTONS */
+
+
+/* COMMENTS */
+.atom-comments-header {
+    margin-bottom:25px;
+}
+    .atom-comments-header.atom-gray-border-bottom{
+        padding-bottom:25px;
+        border-bottom:1px solid var(--atom-secondary);
+    }
+.comment [class*='depth']:not(.depth-1){
+    padding-left:50px;
+}
+
+/* Form container */
+#commentform {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+/* Form fields */
+#commentform input[type="text"],
+#commentform input[type="email"],
+#commentform textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+/* Submit button */
+#commentform input[type="submit"] {
+    width: 100%;
+    background-color: var(--atom-secondary);
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+/* Form fields on focus */
+#commentform input[type="text"]:focus,
+#commentform input[type="email"]:focus,
+#commentform textarea:focus {
+    border: 1px solid #4CAF50;
+}
+/* Submit button on hover */
+#commentform input[type="submit"]:hover {
+    background-color: #7b8084;
+}
+.atom-comments-respond {
+    padding-top: 25px;
+    border-top: 1px solid var(--atom-secondary);
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.atom-comments-respond .atom-comments-reply-title {
+    margin-bottom: 25px;
+}
+span.required-field-message {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+p.comment-form-comment {
+    margin-top: -10px;
+}
+/* END COMMENTS */
+
+/* UWAuctions */
+.footer_uwa_copyright{
+    display:none;
+}
+/* END UWAuctions */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 576px) {
+
+    .atom-post-archive-container {
+        flex-direction: row !important;
+    }
+    .atom-blog-post-image-container {
+        width: 200px;
+        height: 200px;
+        flex: none;
+    }
+    .atom-header {
+        padding:5px;
+    }
+    .atom-header-bar-collapse-menu > i {
+        font-size: 32rem;
+    }
+}
+
+@media screen and (min-width:865px) {
+    .posts-container-inner {
+        flex-direction:column;
+        flex-wrap:unset;
+        align-items:unset;
+        justify-content:unset;
+        width:100%;
+        max-width:850px;
+    }
+    .back-button {
+        font-size:20px;
+    }
+    .atom-blog-post-preview {
+        width:100%;
+        max-width:unset;
+        flex-direction:row;
+        align-items:flex-start;
+    }
+
+    .atom-blog-post-image {
+        /* width:50%; */
+        max-width:400px;
+        box-sizing:border-box;
+    }
+
+    .atom-blog-post-info {
+        border:unset;
+        padding:0 10px 10px 25px;
+    }
+
+    .atom-blog-post-info > h2 {
+        font-size:35px;
+        margin-top:unset;
+    }
+
+}
+
+/* Large screens */
+@media only screen and (min-width: 1050px) {
+
+    /* HEADER */
+    .atom-header-bar-collapse-menu {
+        display:none;
+    }
+    .atom-header-bar-buttons {
+        display:flex;
+        flex-direction:row;
+        align-items:center;
+    }
+    .atom-header-bar-button, .menu-item {
+        padding:25px;
+    }
+
+    .atom-header-bar-collapse-menu > i {
+        user-select:none;
+        font-size: 32rem;
+    }
+    
+    .atom-header-bar-button > ul.sub-menu{
+        display:none;
+        flex-direction:column;
+        background:var(--atom-header);
+        position:absolute;
+        top:6.3vh;
+        right:0;
+        box-sizing:border-box;
+        padding-left:0;
+        margin-top:0;
+        padding-top:1vh;
+    }
+        .menu-item-has-children > a{
+            padding:0;
+        }
+    .atom-header-bar-button.menu-item-has-children:hover > ul.sub-menu {
+        display:flex;
+    }
+    .atom-header-bar-button > ul.sub-menu > li.atom-header-bar-button {
+        padding:25px;
+        text-align:center;
+    }
+    .atom-header-bar-phone-and-address {
+        display:flex;
+    }
+    .atom-header.second .atom-header-bar-buttons-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    /* HEADER END */
+
+    /* FOOTER */
+    .atom-footer {
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        padding:25px;
+        min-height:25vh;
+        justify-content:center;
+    }
+    .atom-footer > .atom-footer-inner {
+        /* display:grid; */
+        width:80%;
+        /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
+        /* grid-template-rows: repeat(2, max-content); */
+    }
+    .atom-footer-inner > .atom-links {
+        display:grid;
+        grid-template-columns:1fr 4fr;
+        width:100%;
+    }
+        .atom-footer-logo-container > .atom-footer-logo{
+            width:100%;
+        }
+        .atom-footer-links-container {
+            grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;
+            margin-left:30%;
+            margin-top:unset;
+        }
+
+
+
+    .atom-footer-icon-container{ 
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        margin-bottom:0px;
+    }
+    .atom-footer-icon {
+        grid-row:1;
+        margin:auto;
+    }
+    .atom-footer-details{
+        margin-bottom:0px !important;
+        grid-row:2;
+        font-size:18rem;
+        margin-top:15rem;
+    }
+
+    .atom-footer-icon.logo {
+        grid-row:1;
+        max-width:72rem;
+        margin:auto;
+        user-select:none;
+    }
+    
+    
+    .atom-footer-2-inner, .atom-footer-3-inner {
+        flex-direction:row;
+    }
+    
+    .atom-footer-2-logo-container > img {
+        max-width:100%;
+    }
+    
+    
+    
+    
+    .atom-footer-3-section {
+        display:flex;
+        flex-direction:column;
+        flex-basis:33.33%;
+    }
+    .atom-footer-3-logo-container > img {
+        width:75%;
+    }
+    .atom-footer-3-business-info{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+    }
+    .atom-footer-3-business-info > p{
+        margin:0;
+        margin-bottom:5px;
+        width:fit-content;
+        color:var(--atom-white);
+    }
+    
+    /* FOOTER END */
+
+
+    /* NOTIFICATION */
+    .atom-notification-inner{
+        width:15vw;
+        height:15vw;
+    }
+    .atom-notification-icon {
+        font-size:64rem;
+    }
+    .atom-notification-message {
+        margin:0;
+    }
+    /* NOTIFICATION END */
+
+}
+
+@media screen and (min-width:1275px) {
+    
+}
+
+
+
+
