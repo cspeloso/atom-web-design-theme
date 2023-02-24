@@ -5,7 +5,7 @@
 ?>
 
     
-    <div class='atom-page-container'>
+    <div class='atom-page-container home'>
         
         <?php
         

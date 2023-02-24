@@ -155,7 +155,7 @@
                     </div>
                     
                     <div class='atom-footer-2-button'>
-                        <a class='atom-primary' href='" . get_permalink(get_page_by_title('shop')) . "' >Shop Now</a>
+                        <a class='atom-primary' href='" . get_permalink(get_page_by_title('shop')) . "' >" . get_theme_mod('atom_footer_button_text', 'Quote') . "</a>
                     </div>
                     
                 </div>
@@ -238,7 +238,7 @@
                     
                     <div class='atom-footer-3-section right'>
                     
-                        <a class='atom-primary' href='" . get_permalink(get_page_by_title('contact')) . "' >Quote</a>
+                        <a class='atom-primary' href='" . get_permalink(get_page_by_title('contact')) . "' >" . get_theme_mod('atom_footer_button_text', 'Quote') . "</a>
                     
                     </div>
                     

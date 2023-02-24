@@ -169,16 +169,24 @@ function markFieldAsIncorrect(field,message){
     $('.atom-contact-error.' + field).addClass('show');
 }
 
+
 const isHeaderBarOverflowing = (object) => $('.atom-header-bar-buttons').width() + $('.atom-header-bar-buttons').position().left > $(window).width();
 
+//  removes the invisible class when the header goes below 150px scroll length, adds invisible class when header is above 150px scroll length.
 $(window).scroll(function(){
+    //  invisible
     if ($(document).scrollTop() <= 150) {
         $('.atom-header.invisible').removeClass('bg-white');
+        $('.atom-header.invisible .atom-logo-header > img').attr('src', $('.atom-logo-header > img').data('alt-logo'));
     }
+    //  solid
     else {
         $('.atom-header.invisible').addClass('bg-white');
+        $('.atom-header.invisible .atom-logo-header > img').attr('src', $('.atom-logo-header > img').data('logo'));
     }
 });
+
+
 
 //  fix for scrollbars on macos
 if (navigator.userAgent.match(/OS X.*Safari/) && ! navigator.userAgent.match(/Chrome/)) {

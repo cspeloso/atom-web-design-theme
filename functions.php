@@ -185,38 +185,62 @@
         $wp_customize->add_setting('atom_theme_header_selection', array(
            'default' => '1' 
         ));
+        $wp_customize->add_setting('atom_theme_header_sticky', array(
+           'default' => '0',
+           'transport' => 'refresh'
+        ));
+        $wp_customize->add_setting('atom_theme_header_invisible', array(
+            'default' => '0',
+            'transport' => 'refresh'
+        ));
         
         $wp_customize->add_control('atom_theme_header_selection', array(
            'label' => 'Header Style Selector',
            'section' => 'atom_theme_header',
+           'settings' => 'atom_theme_header_selection',
            'type' => 'select',
            'choices' => array(
                 '1' => __('Header with Links and Logo'),
-                '2' => __('Header with Links, Logo, Phone and Address')
+                '2' => __('Header with Links, Logo, Phone and Address'),
+                '3' => __('Header with centered logo, links underneath.')
            )
         ));
+        $wp_customize->add_control('atom_theme_header_sticky', array(
+           'label' => 'Sticky Header',
+           'section' => 'atom_theme_header',
+           'settings' => 'atom_theme_header_sticky',
+           'type' => 'checkbox'
+        ));
+        $wp_customize->add_control('atom_theme_header_invisible', array(
+           'label' => 'Transparent Header',
+           'section' => 'atom_theme_header',
+           'settings' => 'atom_theme_header_invisible',
+           'type' => 'checkbox'
+        ));
         
-            if(get_theme_mod('atom_theme_header_selection', '1') == '2')
-            {
-                $wp_customize->add_setting('atom_theme_header_address', array(
-                   'default' => '' 
-                ));
-                $wp_customize->add_setting('atom_theme_header_phone', array(
-                    'default' => ''    
-                ));
-                
-                $wp_customize->add_control('atom_theme_header_phone', array(
-                   'label' => 'Header Phone',
-                   'section' => 'atom_theme_header',
-                   'type' => 'text'
-                ));
-                $wp_customize->add_control('atom_theme_header_address', array(
-                   'label' => 'Header Address',
-                   'section' => 'atom_theme_header',
-                   'type' => 'text'
-                ));
-                
-            }
+        $headerSelection = get_theme_mod('atom_theme_header_selection', '1');
+        
+        if($headerSelection == '2' || $headerSelection == '3')
+        {
+            $wp_customize->add_setting('atom_theme_header_address', array(
+               'default' => '' 
+            ));
+            $wp_customize->add_setting('atom_theme_header_phone', array(
+                'default' => ''    
+            ));
+            
+            $wp_customize->add_control('atom_theme_header_phone', array(
+               'label' => 'Header Phone',
+               'section' => 'atom_theme_header',
+               'type' => 'text'
+            ));
+            $wp_customize->add_control('atom_theme_header_address', array(
+               'label' => 'Header Address',
+               'section' => 'atom_theme_header',
+               'type' => 'text'
+            ));
+            
+        }
         
         // END HEADER SETTINGS
                 
@@ -246,6 +270,9 @@
         ));
         $wp_customize->add_setting('atom_footer_business_zipcode', array(
            'default' => 'Zipcode' 
+        ));
+        $wp_customize->add_setting('atom_footer_button_text', array(
+           'default' => 'Quote' 
         ));
         
         
@@ -289,6 +316,11 @@
            'section' => 'atom_theme_footer',
            'type' => 'checkbox',
            'priority' => 1000
+        ));
+        $wp_customize->add_control('atom_footer_button_text', array(
+           'label' => 'Footer Button Text',
+           'section' => 'atom_theme_footer',
+           'type' => 'text'
         ));
         
         
@@ -371,6 +403,66 @@
     
     //  adds logo size as image dimensions
     add_image_size('atom-theme-logo', 250, 150, true);
+    
+    
+    
+    
+    
+    //  Shortcode that outputs a tile with a title, that when hovered on shows a short description.
+    function atom_shortcode_service_tiles($atts){
+        
+        //  defaults
+        $default_atts = array(
+          'title' => 'Title',
+          'description' => 'This is a short description.'
+        );
+        
+        //  merge default attributes with the user-defined attributes
+        $attributes = shortcode_atts($default_atts, $atts);
+        
+        //  access values
+        $title = $attributes['title'];
+        $description = $attributes['description'];
+        $image = $attributes['image'];
+        
+        $html = "<div class='atom-service-tile'>
+                    <div class='atom-service-tile-image-container'>
+                        <img src='" . $attributes['image'] . "' class='atom-service-tile-image' />
+                    </div>
+                    
+                    <h1 class='atom-service-tile-title'>" . $attributes['title'] . "</h1>
+                    
+                    <div class='atom-service-tile-description'>
+                        <p>{$attributes['description']}</p>
+                    </div>
+                    
+                </div>";
+                
+        return $html;
+    }
+    
+        
+    //  Where all shortcodes for atom plugin are initialized
+    function atom_theme_shortcodes_init() {
+        add_shortcode('atom_service_tile', 'atom_shortcode_service_tiles');
+    }
+    add_action('init', 'atom_shortcodes_init');
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

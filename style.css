@@ -1,7 +1,7 @@
 /*
 Theme Name: Atom Web Design RI
 Text Domain: Atom Web Design RI
-Version: 1.2
+Version: 1.3.3
 Description: Custom Theme built by Atom Web Design RI. All rights reserved.
 Tags: Atom Web Design, atomri, atom, responsive, simple
 Author: Atom Web Design
@@ -31,7 +31,6 @@ Author URI: https://atomri.com
     font-family: 'roboto-condensed';
     src: url('/fonts/RobotoCondensed/RobotoCondensed-Regular.ttf')
 }
-
 /* END FONTS */
 
 
@@ -203,14 +202,17 @@ a[href^='tel'], a[href^='mailto']{
     background-size:cover;
     transition: background-image .25s;
     margin-left:10px;
+    display:flex;
+    justify-content:center;
 }
-.atom-header.bg-white > .atom-logo-header {
+/*.atom-header.bg-white > .atom-logo-header {
     background:url(/images/atom_logo_original.png) no-repeat;
     background-size:cover;
-}
+}*/
 .atom-logo-header > img {
-    height:100%;
+    max-height:100%;
     /*visibility:hidden;*/
+    max-width:250px;
 }
 
 .atom-header-bar-buttons{
@@ -279,7 +281,7 @@ a[href^='tel'], a[href^='mailto']{
     justify-content: center;
     margin-right: 3vw;
     cursor:pointer;
-    user-select:none;
+    user-select:none;.
 }
 .atom-header-bar-collapse-menu > i {
     user-select:none;
@@ -296,6 +298,7 @@ a[href^='tel'], a[href^='mailto']{
     background-color:transparent;
     position:absolute;
     border-bottom:0;
+    color:var(--atom-header);
 }
 .atom-header.invisible .atom-header-bar-button > a:hover, .atom-header.invisible .menu-item > a:hover {
     text-decoration: underline;
@@ -304,7 +307,7 @@ a[href^='tel'], a[href^='mailto']{
     /* color:white; */
 }
 
-.atom-header.sticky {
+.atom-header.sticky, .atom-header.invisible {
     position:fixed;
     width:100%;
 }
@@ -342,6 +345,7 @@ a[href^='tel'], a[href^='mailto']{
     padding-right: 10px;
     margin-top: 10px;
     font-size:18px;
+    transition:all .5s;
 }
     .atom-header-bar-phone-and-address > *:hover{
         text-decoration:underline;
@@ -349,6 +353,11 @@ a[href^='tel'], a[href^='mailto']{
     .atom-header-bar-phone-and-address > *:last-child{
         border-right:unset;
     }
+    
+.atom-header.invisible:not(.bg-white) .atom-header-bar-phone-and-address > * {
+    color: var(--atom-header) !important;
+    border-color: var(--atom-header);
+}
     
 .atom-header.second { 
     height:unset;
@@ -365,6 +374,41 @@ a[href^='tel'], a[href^='mailto']{
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+}
+
+
+.atom-header.third{
+    display:flex;
+    flex-direction:column;
+    min-height:10vh;
+    height:unset;
+    align-items:center;
+    justify-content:center;
+    padding-top:15px;
+    justify-content:space-between;
+    flex-direction:row;
+}
+.atom-header.third .atom-header-bar-collapse-menu{
+    /*display:block;*/
+}
+.atom-header.third .atom-header-bar-buttons.slideout{
+    display:block;
+    backdrop-filter:blur(8px);
+    background-color:rgba(0,0,0,0.7);
+}
+.atom-header.third .atom-header-bar-phone-and-address {
+    align-self:center;
+    margin:10px 0;
+}
+.atom-header.third .atom-header-bar-buttons-inner{
+    display:flex;
+    flex-direction:row;
+}
+.atom-header.third .slideout .atom-header-bar-buttons-inner{
+    flex-direction:column;
+}
+.atom-header.third .menu-item{
+    padding:15px 25px;
 }
 /* HEADER END */
 
@@ -534,7 +578,7 @@ input[type="submit"] {
     box-sizing:border-box;
 }
 .atom-footer-2-logo-container > img {
-    max-width:400px;
+    max-width:250px;
 }
 .atom-footer-2-socials > .social-icons{
     padding:0;
@@ -599,6 +643,7 @@ input[type="submit"] {
     margin:0;
     margin-bottom:5px;
     width:fit-content;
+    color:var(--atom-white);
 }
 .atom-web-sub-footer{
     display:flex;
@@ -720,6 +765,12 @@ input[type="submit"] {
 .atom-page-container.white{
     background:white;
     color:black;
+}
+.atom-header.sticky + .atom-page-container:not(.home), .atom-header.sticky:not(.invisible) + .atom-page-container.home{
+    padding-top: calc(10vh + 25px);
+}
+.atom-header.sticky.invisible + .atom-page-container.home {
+    padding-top: 0;
 }
 .atom-archive-inner {
     display: flex;
@@ -1214,7 +1265,9 @@ p.comment-form-comment {
 
 
 
-
+.d-none{
+    display:none;
+}
 
 
 
@@ -1336,6 +1389,17 @@ p.comment-form-comment {
         flex-direction: row;
         align-items: center;
     }
+    .atom-header.third {
+        flex-direction:column;
+        justify-content:center;
+    }
+    .atom-header.third .slideout .atom-header-bar-buttons-inner {
+        display: flex;
+        flex-direction: column;
+    }
+    .atom-header.third .atom-header-bar-buttons.slideout .atom-header-bar-buttons-inner {
+        flex-direction: column;
+    }
     /* HEADER END */
 
     /* FOOTER */
@@ -1422,7 +1486,6 @@ p.comment-form-comment {
         margin:0;
         margin-bottom:5px;
         width:fit-content;
-        color:var(--atom-white);
     }
     
     /* FOOTER END */
